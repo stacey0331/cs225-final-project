@@ -7,7 +7,8 @@ The task has been seperated into two parts, and each part will be worked on by e
 
 ## Specific Tasks Completed (and by who)
 This week, Shuyuan Gao has worked on writing the development log. 
-We four have all been worked on the team contract and the proposal, and basically set our tone for our project during the first meeting.
+We four have all been worked on the team contract and the proposal, and basically set our tone for our project during the first meeting. 
+Stacey Lee contributed a lot in writing those two files.
 
 ## Problems Encountered 
 Yanjie Han(yanjieh2) missed the meeting on Nov 3. I get to call him after to keep him up for that.
