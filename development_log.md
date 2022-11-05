@@ -19,6 +19,12 @@ In the following week, Yanjie Han(yanjieh2) and Shuyuan Gao(sg80) will be workin
 Stacey Lee(staceyl2) and Jianchen hong(jh104) will work to find a cluster of places that can be visited in order.
 
 Because next week is filled with some of the mid term exams, we would like to see how far we went on solving our part of the problem.
-We will be going on to the website to find sample codes on our algorithm. We will build our data storage.
+We will be going on to the website to find sample codes on our algorithm. We will build our data storage. 
+
+The tasks enlisted are the next week plan:
+1. Complete data correction/cleaning.
+2. Create airports' latitude and airports' longitude map.
+3. Create routes adjacency list (use the maps to calculate weights).
+4. complete the directed graphs
 
 ## Optional: Questions for mentor
