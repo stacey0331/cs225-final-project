@@ -25,6 +25,6 @@ The tasks enlisted are the next week plan:
 1. Complete data correction/cleaning.
 2. Create airports' latitude and airports' longitude map.
 3. Create routes adjacency list (use the maps to calculate weights).
-4. complete the directed graphs
+
 
 ## Optional: Questions for mentor
