@@ -5,5 +5,5 @@ using namespace std;
 
 int main() {
     CleanData temp;
-    temp.cleanRoutes();
+    temp.cleanAll();
 }
