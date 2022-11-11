@@ -3,7 +3,8 @@
 ## Communication
 
 1. **Team Meetings**
-We will have weekly meetings on zoom each Thursday, at 7 pm. Each meeting will be 2 hours.
+We will have weekly meetings on zoom each Thursday, at 7 pm. Each meeting will be 2 hours. 
+Since our weekly meetings are before each development log is due, we will put everything discussed in our development log. 
 
 2. **Assistance**
 We will use school email or WeChat to contact each other. A WeChat group has already been created. We should expect a response as soon as possible, but we should respond every night or within 24 hours.

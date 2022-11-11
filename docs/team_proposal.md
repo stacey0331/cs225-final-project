@@ -26,7 +26,7 @@ When we find an missing entry in any of the column we need, we will delete that 
 ## Data Storage
 We will use adjacency list (with weights) to store routes. because Tarjan's strongly connected components algorithm requires a directed graph as input, we will use an adjacency list to represent all the routes available. Since the routes graph is probably sparse, we will use an adjacency list over an adjacency matrix for efficiency. And then, we will use map to store airlines' name, airports' latitudes, and longitude with keys in routes.txt.: we will use airlines' name for output readability, since routes.txt only has airline code and identifiers. We will use airports' latitude and longitude to complete the adjacency list edge weights. 
 
-The storage cost for the adjacency list will be approximately O(V+E), where V is the number of airports in the data file and E is the number of routes.The space complexity for each map is O(n), where n is the number of airports. 
+The storage cost for the adjacency list will be approximately O(V+E), where V is the number of airports in the data file and E is the number of routes. The space complexity for each map is O(n), where n is the number of airports. 
 
 
 ## Algorithm 
@@ -37,10 +37,13 @@ Dijkstra's Shortest Path Algorithm
 
 Tarjan's Strongly Connected Component Algorithm
    * Function Inputs: takes 1 airport from user input in the terminal. 
-   * Function Outputs: a list of airports to visit in BFS order. 
+   * Function Outputs: a list of airports that are strongly connected to the input airport.  
    * Function Efficiency: since Tarjan's Strongly Connected Component Algorithm is based off DFS, its time complexity will be O(V+E), and space complexity will be O(V). 
 
-
+BFS
+   * Function Inputs: a list of airports that are strongly connected.
+   * Function Outputs: a list of airports to visit in BFS order.
+   * Function Efficiency: time complexity is O(V+E) when adjacency list is used. Its space complexity will be O(V) since in the worst case we have to hold all vertices in the queue. 
 
 
 ## Timeline
