@@ -1,9 +1,13 @@
 #include <iostream>
 #include "../src/CleanData.h"
+#include "../src/Graph.h"
 
 using namespace std;
 
 int main() {
-    CleanData temp;
-    temp.cleanAll();
+    CleanData clean;
+    clean.cleanAll();
+
+    Graph g;
+    g.createAirportMap();
 }

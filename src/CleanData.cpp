@@ -14,6 +14,7 @@ using std::stod;
 /*
 1. 
 If any of these column missing, delete that row
+- Airport ID
 - IATA (4)
 - Latitude (6)
 - Longitude (7)
