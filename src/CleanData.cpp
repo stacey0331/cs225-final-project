@@ -11,16 +11,28 @@
 
 using std::stod;
 
+
+CleanData::CleanData() {
+    for(int i = 0; i <= 14110; i++) {
+        airportAvail.push_back(false);
+    }
+
+    topAirlinesCode = {"QR", "SQ", "EK", "NH", "QF", "JL"};
+}
+
 /*
 1. 
 If any of these column missing, delete that row
-- Airport ID
+- Airport ID (0)
 - IATA (4)
 - Latitude (6)
 - Longitude (7)
 
 2.
 If latitude is not within -90 to 90, or longitude is not between -180 to 180, delete row
+
+3. Since after manual testing we notice airports after airport id 4390 basically have no routes, 
+we will cut this dataset until that. 
 */
 void CleanData::cleanAirports() {
     fstream fin, fout;
@@ -50,6 +62,14 @@ void CleanData::cleanAirports() {
         else {
             std::cout << __LINE__ << std::endl;
         }
+        
+        stringstream idStr(row[0]);
+        int id = 0;
+        idStr >> id;
+
+        // assign airportAvail
+        airportAvail[id] = true;
+        if (id == 4390) break;
     }
 
     fin.close();
@@ -58,21 +78,19 @@ void CleanData::cleanAirports() {
     // rename & remove
     if (remove("../dataset/airports.csv") != 0) {
         perror("Error deleting airports.csv");
-    } else {
-        puts("original airports.csv successfully deleted.");
     }
 
-    if (rename("../dataset/airports_out.csv", "../dataset/airports.csv") == 0) {
-        puts("airports.csv successfully renamed");
-    } else {
+    if (rename("../dataset/airports_out.csv", "../dataset/airports.csv") != 0) {
         perror("Error renaming airports_out.csv.");
     }
 }
 
 /*
+1. 
 If any of these column missing, delete that row:
 - Airline ID (0)
 - Name (1)
+
 */
 void CleanData::cleanAirlines() {
     fstream fin, fout;
@@ -107,13 +125,9 @@ void CleanData::cleanAirlines() {
     // rename & remove
     if (remove("../dataset/airlines.csv") != 0) {
         perror("Error deleting airlines.csv");
-    } else {
-        puts("original airlines.csv successfully deleted.");
     }
 
-    if (rename("../dataset/airlines_out.csv", "../dataset/airlines.csv") == 0) {
-        puts("airlines.csv successfully renamed");
-    } else {
+    if (rename("../dataset/airlines_out.csv", "../dataset/airlines.csv") != 0) {
         perror("Error renaming airlines_out.csv.");
     }
 }
@@ -130,6 +144,18 @@ If stops is not 0 (direct flight), delete that row
 
 3. 
 If either "Source airport" or "Destination airport" is not 3 characters, delete that row
+
+4.
+If either the source or destination airport is not in airport.csv, delete that route
+source airport id is column 3, destination id is 5
+
+5.
+Delete route if flight is codeshare, since it creates confusions
+
+6. 
+Only top 6 airlines routes will be kept, in set "topAirlinesCode"
+Airline IATA: column 0
+
 */
 void CleanData::cleanRoutes() {
     fstream fin, fout;
@@ -137,6 +163,7 @@ void CleanData::cleanRoutes() {
     fout.open("../dataset/routes_out.csv", ios::out);
 
     vector<string> row;
+    bool airportExsits;
 
     string word, line;
     while(fin >> line) {
@@ -146,8 +173,21 @@ void CleanData::cleanRoutes() {
             row.push_back(word);
         }
 
+        // check 4. if airport exsits
+        stringstream sourceStr(row[3]);
+        int source = 0;
+        sourceStr >> source;
+        stringstream destStr(row[5]);
+        int dest = 0;
+        destStr >> dest;
+        airportExsits = true;
+        if (airportAvail[source] == false || airportAvail[dest] == false) {
+            airportExsits = false;
+        }
+
+        bool top6 = topAirlinesCode.find(row[0]) != topAirlinesCode.end();
         bool isIata = row[2].length() == 3 && row[4].length() == 3;
-        if (row[1] != "" && row[2] != "" && row[4] != "" && row[7] == "0" && isIata) {
+        if (top6 && airportExsits && row[1] != "" && row[2] != "" && row[4] != "" && row[6] != "Y" && row[7] == "0" && isIata) {
             for(int i = 0; i < (int)row.size() - 1; i++) {
                 fout << row[i] << ",";
             }
@@ -170,19 +210,16 @@ void CleanData::cleanRoutes() {
     // rename & remove
     if (remove("../dataset/routes.csv") != 0) {
         perror("Error deleting routes.csv");
-    } else {
-        puts("original routes.csv successfully deleted.");
     }
 
-    if (rename("../dataset/routes_out.csv", "../dataset/routes.csv") == 0) {
-        puts("routes_out.csv successfully renamed");
-    } else {
+    if (rename("../dataset/routes_out.csv", "../dataset/routes.csv") != 0) {
         perror("Error renaming routes_out.csv");
     }
 }
 
 void CleanData::cleanAll() {
-    cleanRoutes();
+    // cleanAirports must go before cleanRoutes because of airportAvail
     cleanAirports();
+    cleanRoutes();
     cleanAirlines();
 }

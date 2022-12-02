@@ -9,5 +9,5 @@ int main() {
     clean.cleanAll();
 
     Graph g;
-    g.createAirportMap();
+    // g.createAirportMap();
 }
