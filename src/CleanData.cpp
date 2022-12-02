@@ -17,7 +17,7 @@ CleanData::CleanData() {
         airportAvail.push_back(false);
     }
 
-    topAirlinesCode = {"QR", "SQ", "EK", "NH", "QF", "JL"};
+    // topAirlinesCode = {"QR", "SQ", "EK", "NH", "QF", "JL"};
 }
 
 /*
@@ -57,10 +57,6 @@ void CleanData::cleanAirports() {
                 fout << row[i] << ",";
             }
             fout << row[(int)row.size() - 1] << "\n";
-        } 
-        // for testing
-        else {
-            std::cout << __LINE__ << std::endl;
         }
         
         stringstream idStr(row[0]);
@@ -112,11 +108,7 @@ void CleanData::cleanAirlines() {
                 fout << row[i] << ",";
             }
             fout << row[(int)row.size() - 1] << "\n";
-        } 
-        // // for testing
-        // else {
-        //     std::cout << __LINE__ << std::endl;
-        // }
+        }
     }
 
     fin.close();
@@ -152,7 +144,7 @@ source airport id is column 3, destination id is 5
 5.
 Delete route if flight is codeshare, since it creates confusions
 
-6. 
+6 (disabled now, use if too slow)
 Only top 6 airlines routes will be kept, in set "topAirlinesCode"
 Airline IATA: column 0
 
@@ -185,18 +177,14 @@ void CleanData::cleanRoutes() {
             airportExsits = false;
         }
 
-        bool top6 = topAirlinesCode.find(row[0]) != topAirlinesCode.end();
+        // bool top6 = topAirlinesCode.find(row[0]) != topAirlinesCode.end();
         bool isIata = row[2].length() == 3 && row[4].length() == 3;
-        if (top6 && airportExsits && row[1] != "" && row[2] != "" && row[4] != "" && row[6] != "Y" && row[7] == "0" && isIata) {
+        if (airportExsits && row[1] != "" && row[2] != "" && row[4] != "" && row[6] != "Y" && row[7] == "0" && isIata) {
             for(int i = 0; i < (int)row.size() - 1; i++) {
                 fout << row[i] << ",";
             }
             fout << row[(int)row.size() - 1] << "\n";
         } 
-        // // for testing
-        // else {
-        //     std::cout << __LINE__ << std::endl;
-        // }
 
         /* only read until white space
            last column contains white space

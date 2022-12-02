@@ -17,7 +17,8 @@ class Graph {
         Graph();
         void addEdge(vector<pair<int, double>> adjList[], int a, int b, double weight);
         void createGraph();
-        void createAirportMap();
+        void mapAirportName();
+        void mapLatLong();
         void printGraph(vector<pair<int, double>> adjList[]);
         double getWeight(int sourceAirportId, int destAirportId);
         double toRadians(double num);
@@ -31,8 +32,10 @@ each adjacent nodes are expressed as a pair, with first being airport ID and sec
 */
         vector<pair<int, double>> adjList[4391];
         map<int, string> airportCode; // map airport ID to its IATA code
-        // map<int, double> latMap;
-        // map<int, double> longMap;
+        
+        // map airport id to its latitude/longitude
+        map<int, double> latMap;
+        map<int, double> longMap;
 
 
 };

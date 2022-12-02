@@ -15,6 +15,8 @@ using std::string;
 /* default constructor */
 Graph::Graph() {
     numAirport = 4390;
+    mapLatLong();
+    mapAirportName();
     createGraph();
 }
 
@@ -42,68 +44,10 @@ double Graph::toRadians(double degree) {
 
 // helper function to get weight/distance between 2 airports
 double Graph::getWeight(int sourceAirportId, int destAirportId) {
-    double srcLat = -1;
-    double srcLong = -1;
-    double destLat = -1;
-    double destLong = -1;
-
-    fstream fin;
-    fin.open("../dataset/airports.csv", ios::in);
-
-    vector<string> row;
-    string word, line;
-    while(getline(fin, line, '\n')) {
-        row.clear();
-        stringstream s(line);
-        while(getline(s, word, ',')) {
-            row.push_back(word);
-        }
-
-        /*
-            row[0] is airport ID
-            row[6] is latitude
-            row[7] is longitude
-        */
-        // convert airport ID to int
-        stringstream idStr(row[0]);
-        int id = 0;
-        idStr >> id;
-
-        if (sourceAirportId == id) {
-            // convert from string to double
-            stringstream latStr(row[6]);
-            double latitude = 0;
-            latStr >> latitude;
-            stringstream longStr(row[7]);
-            double longitude = 0;
-            longStr >> longitude;
-
-            srcLat = latitude;
-            srcLong = longitude;
-        } else if (destAirportId == id) {
-            // convert from string to double
-            stringstream latStr(row[6]);
-            double latitude = 0;
-            latStr >> latitude;
-            stringstream longStr(row[7]);
-            double longitude = 0;
-            longStr >> longitude;
-
-            destLat = latitude;
-            destLong = longitude;
-        }
-
-        // no need to continue scan dataset if found all data needed
-        if (srcLat != -1 && destLat != -1) break;
-    }
-    fin.close();
-
-    // distance calculations
-    srcLat = toRadians(srcLat);
-    srcLong = toRadians(srcLong);
-    destLat = toRadians(destLat);
-    destLong = toRadians(destLong);
-
+    double srcLat = toRadians(latMap[sourceAirportId]);
+    double srcLong = toRadians(longMap[sourceAirportId]);
+    double destLat = toRadians(latMap[destAirportId]);
+    double destLong = toRadians(longMap[destAirportId]);
 
     double dlong = destLong - srcLong;
     double dlat = destLat - srcLat;
@@ -116,7 +60,6 @@ double Graph::getWeight(int sourceAirportId, int destAirportId) {
 }
 
 void Graph::createGraph() {
-    cout << "Creating graph and edge weights..." << endl;
     fstream fin;
     fin.open("../dataset/routes.csv", ios::in);
 
@@ -145,7 +88,6 @@ void Graph::createGraph() {
             addEdge(adjList, source, dest, currWeight);
         }
     }
-    // for testing: 
     printGraph(adjList);
     fin.close();
 }
@@ -153,7 +95,7 @@ void Graph::createGraph() {
 /*
 Take airports.csv and map the airports IATA to its airport ID
 */
-void Graph::createAirportMap() {
+void Graph::mapAirportName() {
     fstream fin;
     fin.open("../dataset/airports.csv", ios::in);
 
@@ -173,12 +115,44 @@ void Graph::createAirportMap() {
         int id = 0;
         idStr >> id;
 
-        // // for testing: 
-        // std::cout << row[0] + " is the same as " + std::to_string(id) << std::endl;
-
         airportCode[id] = row[4];
     }
-    // // // for testing: 
-    // std::cout << airportCode[3316] << std::endl;
+    fin.close();
+}
+
+void Graph::mapLatLong() {
+    fstream fin;
+    fin.open("../dataset/airports.csv", ios::in);
+
+    vector<string> row;
+    string word, line;
+
+    int id = 0;
+    double latitude = 0;
+    double longitude = 0;
+    while(getline(fin, line, '\n')) {
+        row.clear();
+        stringstream s(line);
+        while(getline(s, word, ',')) {
+            row.push_back(word);
+        }
+
+        /*
+            row[0] is airport ID
+            row[6] is latitude
+            row[7] is longitude
+        */
+        // convert airport ID to int
+        stringstream idStr(row[0]);
+        idStr >> id;
+        // convert lat/long to double
+        stringstream latStr(row[6]);
+        latStr >> latitude;
+        stringstream longStr(row[7]);
+        longStr >> longitude;
+
+        latMap[id] = latitude;
+        longMap[id] = longitude;
+    }
     fin.close();
 }

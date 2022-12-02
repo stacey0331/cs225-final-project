@@ -13,6 +13,7 @@ class CleanData {
         void cleanRoutes();
     private: 
         vector<bool> airportAvail;
-        // 2022 top 6 airlines 2 letter IATA code, according to Skytrax
-        set<string> topAirlinesCode;
+
+        // // 2022 top 6 airlines 2 letter IATA code, according to Skytrax
+        // set<string> topAirlinesCode;
 };
