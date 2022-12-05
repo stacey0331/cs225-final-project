@@ -88,7 +88,7 @@ void Graph::createGraph() {
             addEdge(adjList, source, dest, currWeight);
         }
     }
-    printGraph(adjList);
+    // printGraph(adjList);
     fin.close();
 }
 
@@ -155,4 +155,8 @@ void Graph::mapLatLong() {
         longMap[id] = longitude;
     }
     fin.close();
+}
+
+vector<pair<int, double>> Graph::getAdjList() {
+    return * adjList;
 }

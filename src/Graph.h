@@ -23,6 +23,9 @@ class Graph {
         double getWeight(int sourceAirportId, int destAirportId);
         double toRadians(double num);
 
+        vector<pair<int, double>> getAdjList();
+
+
     private: 
         int numAirport;
 /*
