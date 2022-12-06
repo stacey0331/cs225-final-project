@@ -1,0 +1,14 @@
+.vscode
+
+# *.swp
+# *.swo
+# *.swn
+# *.swm
+
+*DS_Store
+*.o
+*.d
+.objs/
+
+open-flight/build/
+open-flight/dataset/
