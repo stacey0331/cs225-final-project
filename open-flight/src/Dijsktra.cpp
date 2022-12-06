@@ -15,7 +15,7 @@ using namespace std;
 
 double Dijkstra::shortestpath(int start, int dest) {
     Graph g;
-    vector<idpair> adjlist = g.getAdjList();
+    vector<vector<idpair>> adjlist = g.getAdjList();
     // create a priority queue to sort the distances in increasing order;
     priority_queue<dipair, vector<dipair>, greater<dipair>> pq;
     int volume = adjlist.size();
@@ -30,14 +30,16 @@ double Dijkstra::shortestpath(int start, int dest) {
 
     while(!pq.empty()) {
         for (int i = 0; i < volume; i++) {
-            // get the airport and the distance
-            int v = adjlist[i].first;
-            int weight = adjlist[i].second;
-            // if there is a shorter path of v;
-            if (dist[v] > dist[i] + weight) {
-                //update the distance of v;
-                dist[v] = dist[i] + weight;
-                pq.push(make_pair(dist[v], v));
+            for(int j = 0; j < (int)adjlist[i].size(); j++) {
+                // get the airport and the distance
+                int v = adjlist[i][j].first;
+                int weight = adjlist[i][j].second;
+                // if there is a shorter path of v;
+                if (dist[v] > dist[i] + weight) {
+                    //update the distance of v;
+                    dist[v] = dist[i] + weight;
+                    pq.push(make_pair(dist[v], v));
+                }
             }
         }
     }

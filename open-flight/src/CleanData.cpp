@@ -11,12 +11,14 @@
 
 using std::stod;
 
-
 CleanData::CleanData() {
     for(int i = 0; i <= 14110; i++) {
         airportAvail.push_back(false);
     }
-
+    // cleanAirports must go before cleanRoutes because of airportAvail
+    cleanAirports();
+    cleanRoutes();
+    cleanAirlines();
     // topAirlinesCode = {"QR", "SQ", "EK", "NH", "QF", "JL"};
 }
 
@@ -203,11 +205,4 @@ void CleanData::cleanRoutes() {
     if (rename("../dataset/routes_out.csv", "../dataset/routes.csv") != 0) {
         perror("Error renaming routes_out.csv");
     }
-}
-
-void CleanData::cleanAll() {
-    // cleanAirports must go before cleanRoutes because of airportAvail
-    cleanAirports();
-    cleanRoutes();
-    cleanAirlines();
 }

@@ -14,20 +14,25 @@ using std::string;
 
 /* default constructor */
 Graph::Graph() {
-    numAirport = 4390;
+    numAirport = 4391;
+    for(int i = 0; i < numAirport; i++) {
+        vector<pair<int, double>> temp;
+        adjList.push_back(temp);
+    }
     mapLatLong();
     mapAirportName();
     createGraph();
 }
 
-void Graph::addEdge(vector<pair<int, double>> adjList[], int a, int b, double weight) {
+void Graph::addEdge(int a, int b, double weight) {
   adjList[a].push_back(make_pair(b, weight));
   adjList[b].push_back(make_pair(a, weight));
 }
 
 // helper function for testing correctness of graph
-void Graph::printGraph(vector<pair<int, double>> adjList[]) {
-  for (int d = 0; d <= numAirport; d++) {
+void Graph::printGraph() {
+  for (int d = 0; d < numAirport; d++) {
+    if (adjList[d].empty()) continue;
     cout << "\n Vertex "
        << d << ": ";
     for (auto x : adjList[d])
@@ -60,6 +65,7 @@ double Graph::getWeight(int sourceAirportId, int destAirportId) {
 }
 
 void Graph::createGraph() {
+    cout << "Creating flights graph...." << endl;
     fstream fin;
     fin.open("../dataset/routes.csv", ios::in);
 
@@ -85,10 +91,10 @@ void Graph::createGraph() {
 
         double currWeight = getWeight(source, dest);
         if (currWeight != -1) {
-            addEdge(adjList, source, dest, currWeight);
+            addEdge(source, dest, currWeight);
         }
     }
-    // printGraph(adjList);
+    printGraph();
     fin.close();
 }
 
@@ -157,6 +163,6 @@ void Graph::mapLatLong() {
     fin.close();
 }
 
-vector<pair<int, double>> Graph::getAdjList() {
-    return * adjList;
+vector<vector<pair<int, double>>> Graph::getAdjList() {
+    return adjList;
 }

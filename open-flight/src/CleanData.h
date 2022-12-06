@@ -7,7 +7,6 @@ using namespace std;
 class CleanData {
     public:
         CleanData();
-        void cleanAll();
         void cleanAirports();
         void cleanAirlines();
         void cleanRoutes();

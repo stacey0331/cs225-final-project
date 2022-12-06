@@ -6,11 +6,10 @@
 using namespace std;
 
 int main() {
+    // all methods are called in their constructors
     CleanData clean;
-    clean.cleanAll();
-
     Graph g;
 
-    Dijkstra d;
-    cout << d.shortestpath(2965,2990) << endl;
+    // Dijkstra d;
+    // cout << d.shortestpath(2965,2990) << endl;
 }
