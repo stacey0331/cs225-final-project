@@ -1,0 +1,16 @@
+.vscode
+
+*.swp
+*.swo
+*.swn
+*.swm
+
+*DS_Store
+*.o
+*.d
+.objs/
+
+build/
+# dataset/airlines.csv
+# dataset/airports.csv
+# dataset/routes.csv
