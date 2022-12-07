@@ -1,3 +1,6 @@
+/*
+    Author: Stacey Lee
+*/
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -30,7 +33,7 @@ If any of these column missing, delete that row
 - Latitude (6)
 - Longitude (7)
 
-2.
+2 (TODO)
 If latitude is not within -90 to 90, or longitude is not between -180 to 180, delete row
 
 3. Since after manual testing we notice airports after airport id 4390 basically have no routes, 
@@ -51,7 +54,6 @@ void CleanData::cleanAirports() {
             row.push_back(word);
         }
 
-        // // for some reason stod doesn't work here 
         // bool validLat = stod(row[6]) >= -90 && stod(row[6]) <= 90;
         // bool validLong = stod(row[7]) >= -180 && stod(row[7]) <= 180;
         if (row[4] != "\\N" && row[6] != "" && row[7] != "") {

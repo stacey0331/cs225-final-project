@@ -1,3 +1,6 @@
+/*
+    Author: Stacey Lee
+*/
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -26,7 +29,6 @@ Graph::Graph() {
 
 void Graph::addEdge(int a, int b, double weight) {
   adjList[a].push_back(make_pair(b, weight));
-  adjList[b].push_back(make_pair(a, weight));
 }
 
 // helper function for testing correctness of graph
@@ -65,7 +67,6 @@ double Graph::getWeight(int sourceAirportId, int destAirportId) {
 }
 
 void Graph::createGraph() {
-    cout << "Creating flights graph...." << endl;
     fstream fin;
     fin.open("../dataset/routes.csv", ios::in);
 

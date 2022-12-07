@@ -55,12 +55,12 @@ Do these in order:
 
 
 ### Week 2 (Nov14-Nov18) [Mid-project checkin]
-* Yanjie and Shuyuan: implement the Dijkstra's Shortest Path Algorithm. 
+* Yanjie: implement the Dijkstra's Shortest Path Algorithm. 
 * Stacey and Jianchen: implement Tarjan's Strongly Connected Component Algorithm. 
 
 
 ### Week 3 (Nov 21-Nov 25)
-* Yanjie and Shuyuan: create airlines' name map and convert output airline from airline ID to airline name for readability. 
+* Yanjie: create airlines' name map and convert output airline from airline ID to airline name for readability. 
 * Stacey and Jianchen: implement BFS. 
 
 

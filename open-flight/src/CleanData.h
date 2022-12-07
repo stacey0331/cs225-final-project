@@ -1,3 +1,6 @@
+/*
+    Author: Stacey Lee
+*/
 #include <iostream>
 #include <vector>
 #include <set>

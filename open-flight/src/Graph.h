@@ -1,11 +1,14 @@
+/*
+    Author: Stacey Lee
+*/
 #pragma once
 
 #include <list>
 #include <vector>
 #include <map>
+#include <string>
 
 using namespace std;
-using std::string;
 
 /*
 - Create map to map airport IATA code to airport ID

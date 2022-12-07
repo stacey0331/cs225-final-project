@@ -5,8 +5,7 @@ We have finishd the team contract and the team proposal.
 We have set up rules for how we going to work as a team, and have chosen our dataset and approaches to it.
 The task has been seperated into two parts, and each part will be worked on by each two of us.
 
-## Specific Tasks Completed (and by who)
-This week, Shuyuan Gao has worked on writing the development log. 
+## Specific Tasks Completed (and by who) 
 We four have all been worked on the team contract and the proposal, and basically set our tone for our project during the first meeting. 
 Stacey Lee contributed a lot in writing those two files.
 
@@ -14,7 +13,7 @@ Stacey Lee contributed a lot in writing those two files.
 Yanjie Han(yanjieh2) missed the meeting on Nov 3. I get to call him after to keep him up for that.
 
 ## Plans for next week
-In the following week, Yanjie Han(yanjieh2) and Shuyuan Gao(sg80) will be working on to find the shortest routes by airport.
+In the following week, Yanjie Han(yanjieh2) will be working on to find the shortest routes by airport.
 
 Stacey Lee(staceyl2) and Jianchen hong(jh104) will work to find a cluster of places that can be visited in order.
 

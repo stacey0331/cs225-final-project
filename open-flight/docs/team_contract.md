@@ -17,7 +17,7 @@ We will ensure that every member is present for all meetings. If someone can’t
 ## Collaboration
 
 4. **Work Distribution**
-We will mainly divide the work by each tool. Yanjie and Shuyuan will work on the find shortest path tool with the Dijkstra’s algorithm, Stacey and Jianchen will work on the finding cluster tool with strongly connected component algorithm and BFS. Since the finding cluster tool requires more algorithm and will be more complex, any unforeseen work or unexpected complications will be assigned to Yanjie and Shuyuan.
+We will mainly divide the work by each tool. Yanjie will work on the find shortest path tool with the Dijkstra’s algorithm, Stacey and Jianchen will work on the finding cluster tool with strongly connected component algorithm and BFS. Since the finding cluster tool requires more algorithm and will be more complex, any unforeseen work or unexpected complications will be assigned to Yanjie.
 
 
 5. **Time Commitment**
@@ -30,4 +30,4 @@ When there is a conflict we will let the others in the group decide who is the r
 
 ## Signatures
 
-Yanjie Han(yanjieh2),Shuyuan Gao(sg80), Jianchen hong(jh104), Stacey Lee(staceyl2)
+Yanjie Han(yanjieh2), Jianchen hong(jh104), Stacey Lee(staceyl2)
