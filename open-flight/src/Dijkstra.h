@@ -19,7 +19,6 @@ typedef pair<int, double> idpair;
 
 class Dijkstra {
     public:
-        double shortestpath(int start, int dest);
+        double shortestpath(int start, int dest, Graph g);
     private:
-
 };

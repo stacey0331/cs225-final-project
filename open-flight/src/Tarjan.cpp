@@ -23,20 +23,19 @@ Tarjan::Tarjan() {
  
     // Call the recursive function to find strongly
     // connected components in DFS with vertex i
-    for (int i = 0; i < (int)adjList.size(); i++)
-        if (disc[i] == -1)
+    for (int i = 0; i < (int)adjList.size(); i++) {
+        if (disc[i] == -1) {
             findScc(i);
-
-    for(vector<int> i: sscVec) {
-        if (i.size() > 1) {
-            cout << i.size() << endl;
         }
     }
 
+    // // for testing:
+    // for(vector<int> i: sscVec) {
+    //     cout << (int)i.size() << endl;
+    // }
 }
 
-void Tarjan::findScc(int u)
-{
+void Tarjan::findScc(int u) {
     static int time = 0;
  
     // Initialize discovery time and low value
@@ -60,7 +59,9 @@ void Tarjan::findScc(int u)
     int w = 0;
     if (low[u] == disc[u]) {
         vector<int> temp;
+        bool moreThanItself = false;
         while (st.top() != u) {
+            moreThanItself = true;
             w = (int)st.top();
             // cout << w << " ";
             temp.push_back(w);
@@ -72,11 +73,15 @@ void Tarjan::findScc(int u)
         w = (int)st.top();
         // cout << w << "\n";
         temp.push_back(w);
-        sccInd[w] = compCount;
+        if (moreThanItself) {
+            sccInd[w] = compCount;
+            sscVec.push_back(temp);
+            compCount++;
+        } else {
+            sccInd[w] = -1;
+        }
         stackMember[w] = false;
         st.pop();
-        sscVec.push_back(temp);
-        compCount++;
     }
 }
 

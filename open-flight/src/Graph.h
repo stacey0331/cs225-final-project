@@ -30,6 +30,8 @@ class Graph {
 
         /* helper functions */
         vector<vector<pair<int, double>>> getAdjList();
+        int getAirportIdByCode(string iata);
+        string getAirportNameById(int id);
 
     private: 
         int numAirport;

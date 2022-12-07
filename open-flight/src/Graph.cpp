@@ -167,3 +167,21 @@ void Graph::mapLatLong() {
 vector<vector<pair<int, double>>> Graph::getAdjList() {
     return adjList;
 }
+
+/*
+    return -1 if not found
+*/
+int Graph::getAirportIdByCode(string iata) {
+    iata = "\"" + iata + "\"";
+    map<int, string>::iterator it;
+    for (it = airportCode.begin(); it != airportCode.end(); it++) {
+        if (it->second.compare(iata) == 0) {
+            return it->first;
+        }
+    }
+    return -1;
+}
+
+string Graph::getAirportNameById(int id) {
+    return airportCode[id].substr(1,3);
+}

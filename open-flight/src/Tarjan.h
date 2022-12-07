@@ -26,5 +26,5 @@ class Tarjan {
         */
         vector<int> sccInd; 
         vector<vector<int>> sscVec; // each element is a stongly connected component
-        int compCount;
+        int compCount; // index of sscVec
 };

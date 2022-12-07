@@ -16,8 +16,8 @@
 #include "Dijkstra.h"
 using namespace std;
 
-double Dijkstra::shortestpath(int start, int dest) {
-    Graph g;
+
+double Dijkstra::shortestpath(int start, int dest, Graph g) {
     vector<vector<idpair>> adjlist = g.getAdjList();
     // create a priority queue to sort the distances in increasing order;
     priority_queue<dipair, vector<dipair>, greater<dipair>> pq;
