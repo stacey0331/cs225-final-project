@@ -32,6 +32,7 @@ class Graph {
         vector<vector<pair<int, double>>> getAdjList();
         int getAirportIdByCode(string iata);
         string getAirportNameById(int id);
+        int getnumAirport();
 
     private: 
         int numAirport;

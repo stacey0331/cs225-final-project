@@ -43,6 +43,8 @@ void finishTool(Graph g) {
 void shortestPath(Graph g) {
     Dijkstra d;
     string source, dest;
+    int sourceId;
+    int destId;
     cout << "-----------------" << endl;
     cout << "Find the shortest routes between 2 airports." << endl;
     cout << "" << endl;
@@ -55,12 +57,20 @@ void shortestPath(Graph g) {
     cin >> dest;
     transform(dest.begin(), dest.end(), dest.begin(), ::toupper);
 
+    sourceId = g.getAirportIdByCode(source);
+    destId = g.getAirportIdByCode(dest);
+
     cout << "" << endl;
-    if (g.getAirportIdByCode(source) == -1 || g.getAirportIdByCode(dest) == -1) {
+    if (sourceId == -1 || destId == -1) {
         cout << "Please enter correct airport IATA codes. " << endl;
         shortestPath(g);
     } else {
-        cout << "Distance: " + to_string(d.shortestpath(g.getAirportIdByCode(source), g.getAirportIdByCode(dest), g)) << endl;
+        cout << "Distance: " + to_string(d.shortestpath(sourceId, destId, g)) << endl;
+        vector<int> routeList = d.getroute(sourceId, destId);
+        for(int i = 0; i < (int)routeList.size() - 1; i++) {
+            cout << g.getAirportNameById(routeList[i]) << "-";
+        }
+        cout << g.getAirportNameById(routeList[(int)routeList.size() - 1]) << endl;
     }
     finishTool(g);
 }
@@ -84,7 +94,7 @@ void findCluster(Graph g) {
         cout << "Please enter a correct airport IATA code. " << endl;
         findCluster(g);
     } else {
-        clusterV = t.getSscList(g.getAirportIdByCode(airportIn));
+        clusterV = t.getSccList(g.getAirportIdByCode(airportIn));
         cout << "Airports that are strongly connected to " + airportIn + ": " << endl;
         for(int i = 0; i < (int)clusterV.size() - 1; i++) {
             cout << g.getAirportNameById(clusterV[i]) << ", ";
@@ -125,17 +135,6 @@ void selectTool() {
 int main() {
     // constructor will call data correction functions
     CleanData clean;
-
-    // Dijkstra d;
-    // // 2965: AER
-    // // 2990: KZN
-    // cout << d.shortestpath(2965,2990) << endl;
-
-    // Tarjan t;
-    // vector<int> sscList = t.getSscList(106);
-    // for(int i: sscList)
-    //     cout << i << ", ";
-    // cout << "" << endl;
 
     cout << "" << endl;
     cout << "" << endl;

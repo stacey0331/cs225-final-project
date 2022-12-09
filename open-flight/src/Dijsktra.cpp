@@ -40,30 +40,29 @@ double Dijkstra::shortestpath(int start, int dest, Graph g) {
             int v = adjlist.at(u).at(i).first;
             int weight = adjlist.at(u).at(i).second;
             // if there is a shorter path of v;
-            if (dist.at(v)> dist.at(u) + weight) {
+            if (dist.at(v) > dist.at(u) + weight) {
                 //update the distance of v;
                 dist.at(v) = dist.at(u) + weight;
                 pq.push(make_pair(dist.at(v), v));
+                // update the previous vertex of v;
+                pre[v] = u;
             }
         }
-        // for (int i = 0; i < volume; i++) {
-        //     for(int j = 0; j < (int)adjlist[i].size(); j++) {
-        //         // get the airport and the distance
-        //         int v = adjlist[i][j].first;
-        //         int weight = adjlist[i][j].second;
-        //         // if there is a shorter path of v;
-        //         if (dist[v] > dist[i] + weight) {
-        //             //update the distance of v;
-        //             dist[v] = dist[i] + weight;
-        //             pq.push(make_pair(dist[v], v));
-        //         }
-        //     }
-        // }
     }
-    // cout << start << endl;
-    // cout << dest << endl;
-    // for (int i = 2900; i < 3000; i++) {
-    //     cout << dist.at(i) << endl;
-    // }
     return dist.at(dest);
+}
+
+vector<int> Dijkstra::getroute(int start, int dest) {
+    int s = dest;
+    vector<int> route;
+    vector<int> previous;
+    while (s != start) {
+        s = pre[s];
+        previous.push_back(s);
+    }
+    for (size_t i = previous.size() - 1; i > 0; i--) {
+        route.push_back(previous.at(i));
+    }
+    route.push_back(dest);
+    return route;
 }

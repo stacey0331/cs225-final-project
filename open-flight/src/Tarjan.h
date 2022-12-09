@@ -10,7 +10,9 @@ class Tarjan {
     public:
         Tarjan();
         void findScc(int u);
-        vector<int> getSscList(int airportId);
+        vector<int> getSccList(int airportId);
+        vector<vector<int>> getSccVec();
+
     private:
         vector<vector<pair<int, double>>> adjList;
         vector<int> disc;
@@ -22,9 +24,9 @@ class Tarjan {
             sccInd:
             -2: haven't assign
             -1: itself is a component
-            others: index in sscVec
+            others: index in sccVec
         */
         vector<int> sccInd; 
-        vector<vector<int>> sscVec; // each element is a stongly connected component
-        int compCount; // index of sscVec
+        vector<vector<int>> sccVec; // each element is a stongly connected component
+        int compCount; // index of sccVec
 };

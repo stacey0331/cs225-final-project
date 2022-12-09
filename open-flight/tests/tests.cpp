@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include "../src/CleanData.h"
+#include "../src/Dijkstra.h"
+#include "../src/Tarjan.h"
+#include "../src/Graph.h"
 
 TEST_CASE("CleanData::cleanRoutes", "[cleandata]") {
     fstream fin;
@@ -70,4 +73,44 @@ TEST_CASE("CleanData::cleanAirlines", "[cleandata]") {
         REQUIRE(row[1] != "");
     }
     fin.close();
+}
+
+
+TEST_CASE("Tarjan::includes all nodes in graph", "[Tarjan]") {
+    vector<int> exist;
+    Graph g;
+    Tarjan t;
+    vector<vector<int>> sccVec = t.getSccVec();
+    for(int i=0; i<g.getnumAirport(); i++) {
+        exist.push_back(-1);
+    }
+    for(int i=0; i < (int)sccVec.size(); i++) {
+        for(int j=0; j < (int)sccVec[i].size(); j++) {
+            exist[sccVec[i][j]] = 1;
+        }
+    }
+    for(int i = 0; i < g.getnumAirport(); i++) {
+        REQUIRE(exist[i] == 1);
+    }
+}
+
+
+TEST_CASE("Tarjan::can reach other vertex in component", "[Tarjan]") {
+    Tarjan t;
+    Dijkstra d;
+    Graph g;
+    #define INF 0x3f3f3f3f
+    vector<vector<int>> sccVec = t.getSccVec();
+    for(int i=0; i<(int)sccVec.size(); i++) {
+        for(int j=0;j<(int)sccVec[i].size(); j++) {
+            bool validRand = false;
+            int randNum = -1;
+            while(validRand == false) {
+                randNum = 0 + (rand() % sccVec[i].size() - 1);
+                validRand = (0 + (rand() % sccVec[i].size() - 1) != j);
+            }
+            REQUIRE(d.shortestpath(sccVec[i][j], sccVec[i][randNum], g) != INF);
+            REQUIRE(d.shortestpath(sccVec[i][randNum], sccVec[i][j], g) != INF);
+        }
+    }
 }

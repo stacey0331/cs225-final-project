@@ -185,3 +185,7 @@ int Graph::getAirportIdByCode(string iata) {
 string Graph::getAirportNameById(int id) {
     return airportCode[id].substr(1,3);
 }
+
+int Graph::getnumAirport() {
+    return adjList.size();
+}

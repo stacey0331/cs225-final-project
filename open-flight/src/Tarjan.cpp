@@ -30,7 +30,7 @@ Tarjan::Tarjan() {
     }
 
     // // for testing:
-    // for(vector<int> i: sscVec) {
+    // for(vector<int> i: sccVec) {
     //     cout << (int)i.size() << endl;
     // }
 }
@@ -75,7 +75,7 @@ void Tarjan::findScc(int u) {
         temp.push_back(w);
         if (moreThanItself) {
             sccInd[w] = compCount;
-            sscVec.push_back(temp);
+            sccVec.push_back(temp);
             compCount++;
         } else {
             sccInd[w] = -1;
@@ -85,10 +85,10 @@ void Tarjan::findScc(int u) {
     }
 }
 
-vector<int> Tarjan::getSscList(int airportId) {
+vector<int> Tarjan::getSccList(int airportId) {
     vector<int> outV;
     if (sccInd[airportId] >= 0) {
-        return sscVec[sccInd[airportId]];
+        return sccVec[sccInd[airportId]];
     } else if (sccInd[airportId] == -1) {
         outV.push_back(airportId);
     } else {
@@ -96,4 +96,8 @@ vector<int> Tarjan::getSscList(int airportId) {
         cout << "Tarjan code error" << endl;
     }
     return outV;
+}
+
+vector<vector<int>> Tarjan::getSccVec() {
+    return sccVec;
 }
