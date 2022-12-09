@@ -171,7 +171,7 @@ source airport id is column 3, destination id is 5
 5.
 Delete route if flight is codeshare, since it creates confusions
 
-6 
+6. (disabled now, use if too slow)
 Only top 20 airlines routes will be kept, in set "topAirlinesCode"
 Airline IATA: column 0
 
