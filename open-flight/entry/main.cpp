@@ -1,6 +1,10 @@
+#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <cstdio>
+#include <stdio.h>
 
 #include "../src/CleanData.h"
 #include "../src/Graph.h"
@@ -17,7 +21,7 @@ void finishTool(Graph g) {
     cout << "Do you wish to keep using this program?" << endl;
     cout << "1. Yes, continue with find shortest routes tool." << endl;
     cout << "2. Yes, continue with airport cluster tool." << endl;
-    cout << "3. No" << endl;
+    cout << "3. Quit" << endl;
     cout << "\tYour choice: ";
     int input;
     cin >> input;
@@ -68,9 +72,9 @@ void shortestPath(Graph g) {
         cout << "Distance: " + to_string(d.shortestpath(sourceId, destId, g)) << endl;
         vector<int> routeList = d.getroute(sourceId, destId);
         for(int i = 0; i < (int)routeList.size() - 1; i++) {
-            cout << g.getAirportNameById(routeList[i]) << "-";
+            cout << g.getAirportCodeById(routeList[i]) << "-";
         }
-        cout << g.getAirportNameById(routeList[(int)routeList.size() - 1]) << endl;
+        cout << g.getAirportCodeById(routeList[(int)routeList.size() - 1]) << endl;
     }
     finishTool(g);
 }
@@ -95,11 +99,23 @@ void findCluster(Graph g) {
         findCluster(g);
     } else {
         clusterV = t.getSccList(g.getAirportIdByCode(airportIn));
-        cout << "Airports that are strongly connected to " + airportIn + ": " << endl;
-        for(int i = 0; i < (int)clusterV.size() - 1; i++) {
-            cout << g.getAirportNameById(clusterV[i]) << ", ";
+        if (clusterV.size() > 10) {
+            cout << "Since there's too many airports to display, we will put them in a file." << endl;
+            cout << "Outfile file location (from root): open-flight/entry/scc-output.txt" << endl;
+            fstream fout;
+            fout.open("../entry/scc-output.txt", ios::out);
+            for(int i = 0; i < (int)clusterV.size(); i++) {
+                fout << g.getAirportCodeById(clusterV[i]) << " -- ";
+                fout << g.getAirportNameById(clusterV[i]) << "\n";
+            }
+            fout.close();
+        } else {
+            cout << "Airports that are strongly connected to " + airportIn + ": " << endl;
+            for(int i = 0; i < (int)clusterV.size(); i++) {
+                cout << g.getAirportCodeById(clusterV[i]) << " -- ";
+                cout << g.getAirportNameById(clusterV[i]) << endl;
+            }
         }
-        cout << g.getAirportNameById(clusterV[(int)clusterV.size() - 1]) + "." << endl;
     }
     finishTool(g);
 }

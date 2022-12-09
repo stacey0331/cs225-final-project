@@ -31,7 +31,11 @@ Tarjan::Tarjan() {
 
     // // for testing:
     // for(vector<int> i: sccVec) {
-    //     cout << (int)i.size() << endl;
+    //     if (i.size() == 7) {
+    //         cout << i[0] << endl;
+    //         cout << i[1] << endl;
+
+    //     }
     // }
 }
 

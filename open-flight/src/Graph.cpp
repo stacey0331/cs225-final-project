@@ -23,7 +23,7 @@ Graph::Graph() {
         adjList.push_back(temp);
     }
     mapLatLong();
-    mapAirportName();
+    mapAirportCodeName();
     createGraph();
 }
 
@@ -102,7 +102,7 @@ void Graph::createGraph() {
 /*
 Take airports.csv and map the airports IATA to its airport ID
 */
-void Graph::mapAirportName() {
+void Graph::mapAirportCodeName() {
     fstream fin;
     fin.open("../dataset/airports.csv", ios::in);
 
@@ -117,12 +117,14 @@ void Graph::mapAirportName() {
         }
 
         // row[0] is airport ID
+        // row[1] is airport name
         // row[4] is airport IATA
         stringstream idStr(row[0]);
         int id = 0;
         idStr >> id;
 
         airportCode[id] = row[4];
+        airportName[id] = row[1];
     }
     fin.close();
 }
@@ -182,8 +184,12 @@ int Graph::getAirportIdByCode(string iata) {
     return -1;
 }
 
-string Graph::getAirportNameById(int id) {
+string Graph::getAirportCodeById(int id) {
     return airportCode[id].substr(1,3);
+}
+
+string Graph::getAirportNameById(int id) {
+    return airportName[id].substr(1,airportName[id].length() - 1);
 }
 
 int Graph::getnumAirport() {

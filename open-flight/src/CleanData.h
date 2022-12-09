@@ -3,7 +3,6 @@
 */
 #include <iostream>
 #include <vector>
-#include <set>
 
 using namespace std;
 
@@ -13,9 +12,10 @@ class CleanData {
         void cleanAirports();
         void cleanAirlines();
         void cleanRoutes();
+        // bool inTop20(string airline);
     private: 
         vector<bool> airportAvail;
 
-        // // 2022 top 6 airlines 2 letter IATA code, according to Skytrax
-        // set<string> topAirlinesCode;
+        // // 2022 top 20 airlines 2 letter IATA code, according to Skytrax
+        // vector<string> topAirlinesCode; 
 };
