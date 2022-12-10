@@ -9,8 +9,10 @@ The Dijkstra class contains two functions which are shortestpath and getroute.
 The shortestpath function will return the shortest distance between two airports with two parameters which are the start point and the destination (in int). 
 
 The getroute function will return a vector of int which represents the airports that we need to reach if we want the shortest path.
+
 ### Correctness/Testings
 In order to make sure the algorithm works correctly, we check the direct flight and the flight with tranfers. The distance between two airports can be simply got from the adjacency list which is made in the Graph class. If the value get by the shortestpath function is the same as the value get from the adjacency list, it means the function is correct. To check the getroute function, we can first check the start point and the destination are correct. And for the airports in between, we can use the adjacency list to get the shortest distance to check if they are matched.
+
 ---
 ## Project Goal #2: Find Airport Cluster (Tarjan's strongly connected components algorithm)
 ### Implementation
