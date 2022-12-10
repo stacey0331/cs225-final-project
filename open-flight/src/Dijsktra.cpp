@@ -57,12 +57,18 @@ vector<int> Dijkstra::getroute(int start, int dest) {
     vector<int> route;
     vector<int> previous;
     while (s != start) {
-        s = pre[s];
         previous.push_back(s);
+        s = pre[s];  
     }
-    for (size_t i = previous.size() - 1; i > 0; i--) {
-        route.push_back(previous.at(i));
+    previous.push_back(start);
+    // cout << previous.at(0) << endl;
+    // cout << previous.at(1) << endl;
+    for (size_t i = previous.size(); i > 0; i--) {
+        route.push_back(previous.at(i - 1));
     }
-    route.push_back(dest);
+
+    // cout << route.size() << endl;
+    // cout << route.at(0) << endl;
+    // cout << route.at(1) << endl;
     return route;
 }

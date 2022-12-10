@@ -56,7 +56,7 @@ If any of these column missing, delete that row
 - Latitude (6)
 - Longitude (7)
 
-2 (TODO)
+2
 If latitude is not within -90 to 90, or longitude is not between -180 to 180, delete row
 
 3. Since after manual testing we notice airports after airport id 4390 basically have no routes, 
@@ -77,9 +77,16 @@ void CleanData::cleanAirports() {
             row.push_back(word);
         }
 
-        // bool validLat = stod(row[6]) >= -90 && stod(row[6]) <= 90;
-        // bool validLong = stod(row[7]) >= -180 && stod(row[7]) <= 180;
-        if (row[4] != "\\N" && row[6] != "" && row[7] != "") {
+        stringstream latStr(row[6]);
+        stringstream longStr(row[7]);
+        double latN = 0;
+        double longN = 0;
+        latStr >> latN;
+        longStr >> longN;
+
+        bool validLat = (latN >= -90) && (latN <= 90);
+        bool validLong = (longN >= -180) && (longN <= 180);
+        if (row[4] != "\\N" && row[6] != "" && row[7] != "" && validLat && validLong) {
             for(int i = 0; i < (int)row.size() - 1; i++) {
                 fout << row[i] << ",";
             }
