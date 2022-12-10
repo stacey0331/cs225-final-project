@@ -5,6 +5,12 @@
 * Jianchen hong(jh104)
 * Yanjie Han(yanjieh2)
 
+## Repo Structure
+* Major code and algorithms are in [`/open-flight/src`](https://github.com/stacey0331/cs225-final-project/tree/master/open-flight/src)
+* Datasets are in [`/open-flight/dataset`](https://github.com/stacey0331/cs225-final-project/tree/master/open-flight/dataset)
+* Written report, project proposal, and team contracts are in [`/open-flight/docs`](https://github.com/stacey0331/cs225-final-project/tree/master/open-flight/docs)
+
+
 ## Quick start
 When you have the right environment, in root directory:
 ```
@@ -38,4 +44,13 @@ cmake ..
 After making sure you're in the build directory:
 ```
 make && ./main
+```
+Instructions to use this program will appear in the terminal after it's compiled and run successfully. 
+
+## Run Test Cases
+In root directory (after creating /build and run cmake):
+```
+cd open-flight
+cd build
+make && ./test
 ```

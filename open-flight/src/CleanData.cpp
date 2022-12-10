@@ -20,28 +20,6 @@ CleanData::CleanData() {
         airportAvail.push_back(false);
     }
     
-    // topAirlinesCode.push_back("QR");
-    // topAirlinesCode.push_back("SQ");
-    // topAirlinesCode.push_back("EK");
-    // topAirlinesCode.push_back("NH");
-    // topAirlinesCode.push_back("QF");
-    // topAirlinesCode.push_back("JL");
-    // topAirlinesCode.push_back("TK");
-    // topAirlinesCode.push_back("AF");
-    // topAirlinesCode.push_back("KE");
-    // topAirlinesCode.push_back("LX");
-    // topAirlinesCode.push_back("BA");
-    // topAirlinesCode.push_back("EY");
-    // topAirlinesCode.push_back("CZ");
-    // topAirlinesCode.push_back("HU");
-    // topAirlinesCode.push_back("LH");
-    // topAirlinesCode.push_back("CX");
-    // topAirlinesCode.push_back("WA");
-    // topAirlinesCode.push_back("KL");
-    // topAirlinesCode.push_back("BR");
-    // topAirlinesCode.push_back("VS");
-    // topAirlinesCode.push_back("UK");
-    
     // cleanAirports must go before cleanRoutes because of airportAvail
     cleanAirports();
     cleanRoutes();
@@ -211,7 +189,6 @@ void CleanData::cleanRoutes() {
             airportExsits = false;
         }
 
-        // bool top20 = inTop20(row[0]);
         bool isIata = row[2].length() == 3 && row[4].length() == 3;
         if (airportExsits && row[1] != "" && row[2] != "" && row[4] != "" && row[6] != "Y" && row[7] == "0" && isIata) {
             for(int i = 0; i < (int)row.size() - 1; i++) {
@@ -238,11 +215,3 @@ void CleanData::cleanRoutes() {
         perror("Error renaming routes_out.csv");
     }
 }
-
-// bool CleanData::inTop20(string airline) {
-//     for(int i = 0; i < (int)topAirlinesCode.size(); i++) {
-//         if (topAirlinesCode[i].compare(airline) == 0)
-//             return true;
-//     }
-//     return false;
-// }

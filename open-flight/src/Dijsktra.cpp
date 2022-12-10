@@ -24,14 +24,12 @@ double Dijkstra::shortestpath(int start, int dest, Graph g) {
     int volume = adjlist.size();
     // initialize the distance for all airports to INFITE;
     vector<double> dist(volume, INF);
-    // cout << volume << endl;
     for(int i = 0; i < volume; i++) {
         dist.push_back(INF);
     }
     // initialize the start point with distance 0;
     pq.push(make_pair(0, start));
     dist.at(start) = 0;
-    // cout << "here" << endl;
     while(!pq.empty()) {
         int u = pq.top().second;
         pq.pop();
@@ -61,14 +59,8 @@ vector<int> Dijkstra::getroute(int start, int dest) {
         s = pre[s];  
     }
     previous.push_back(start);
-    // cout << previous.at(0) << endl;
-    // cout << previous.at(1) << endl;
     for (size_t i = previous.size(); i > 0; i--) {
         route.push_back(previous.at(i - 1));
     }
-
-    // cout << route.size() << endl;
-    // cout << route.at(0) << endl;
-    // cout << route.at(1) << endl;
     return route;
 }

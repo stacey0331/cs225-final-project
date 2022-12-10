@@ -105,15 +105,21 @@ void findCluster(Graph g) {
             fstream fout;
             fout.open("../entry/scc-output.txt", ios::out);
             for(int i = 0; i < (int)clusterV.size(); i++) {
-                fout << g.getAirportCodeById(clusterV[i]) << " -- ";
-                fout << g.getAirportNameById(clusterV[i]) << "\n";
+                // exclude the input airport
+                if (g.getAirportIdByCode(airportIn) != clusterV[i]) {
+                    fout << g.getAirportCodeById(clusterV[i]) << " -- ";
+                    fout << g.getAirportNameById(clusterV[i]) << "\n";
+                }
             }
             fout.close();
         } else {
             cout << "Airports that are strongly connected to " + airportIn + ": " << endl;
             for(int i = 0; i < (int)clusterV.size(); i++) {
-                cout << g.getAirportCodeById(clusterV[i]) << " -- ";
-                cout << g.getAirportNameById(clusterV[i]) << endl;
+                // exclude the input airport
+                if (g.getAirportIdByCode(airportIn) != clusterV[i]) {
+                    cout << g.getAirportCodeById(clusterV[i]) << " -- ";
+                    cout << g.getAirportNameById(clusterV[i]) << endl;
+                }
             }
         }
     }

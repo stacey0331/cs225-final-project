@@ -15,7 +15,7 @@
 using namespace std;
 using std::string;
 
-/* default constructor */
+// default constructor
 Graph::Graph() {
     numAirport = 4391;
     for(int i = 0; i < numAirport; i++) {
@@ -27,20 +27,9 @@ Graph::Graph() {
     createGraph();
 }
 
+// add an edge from node a to node b with weight
 void Graph::addEdge(int a, int b, double weight) {
   adjList[a].push_back(make_pair(b, weight));
-}
-
-// helper function for testing correctness of graph
-void Graph::printGraph() {
-  for (int d = 0; d < numAirport; d++) {
-    if (adjList[d].empty()) continue;
-    cout << "\n Vertex "
-       << d << ": ";
-    for (auto x : adjList[d])
-      cout << to_string(x.first) + "(" << to_string(x.second) + ")" << ", ";
-    cout << "" << endl;
-  }
 }
 
 // helper function to convert from degree to radians
@@ -95,13 +84,11 @@ void Graph::createGraph() {
             addEdge(source, dest, currWeight);
         }
     }
-    // printGraph();
     fin.close();
 }
 
-/*
-Take airports.csv and map the airports IATA to its airport ID
-*/
+
+// Read airports.csv and map the airports IATA to its airport ID
 void Graph::mapAirportCodeName() {
     fstream fin;
     fin.open("../dataset/airports.csv", ios::in);
@@ -116,9 +103,11 @@ void Graph::mapAirportCodeName() {
             row.push_back(word);
         }
 
-        // row[0] is airport ID
-        // row[1] is airport name
-        // row[4] is airport IATA
+        /*
+            row[0] is airport ID
+            row[1] is airport name
+            row[4] is airport IATA
+        */
         stringstream idStr(row[0]);
         int id = 0;
         idStr >> id;
@@ -129,6 +118,8 @@ void Graph::mapAirportCodeName() {
     fin.close();
 }
 
+// Read airports.csv and map latitude and longtitude to its airport id
+// in seperate maps
 void Graph::mapLatLong() {
     fstream fin;
     fin.open("../dataset/airports.csv", ios::in);
@@ -166,12 +157,15 @@ void Graph::mapLatLong() {
     fin.close();
 }
 
+// helper function to get private member adjList
 vector<vector<pair<int, double>>> Graph::getAdjList() {
     return adjList;
 }
 
-/*
-    return -1 if not found
+/* 
+    Helper function for private member map
+    Get airport ID with its 3-letter IATA code
+    return -1 if not found 
 */
 int Graph::getAirportIdByCode(string iata) {
     iata = "\"" + iata + "\"";
@@ -184,14 +178,28 @@ int Graph::getAirportIdByCode(string iata) {
     return -1;
 }
 
+/*
+    Helper function for private member map
+    Get airport IATA code by its airport ID
+*/
 string Graph::getAirportCodeById(int id) {
     return airportCode[id].substr(1,3);
 }
 
+/*
+    Helper function
+    Get airport full name by its airport ID
+*/
 string Graph::getAirportNameById(int id) {
-    return airportName[id].substr(1,airportName[id].length() - 1);
+    return airportName[id].substr(1,airportName[id].length() - 2);
 }
 
+/*
+    Helper function
+    Get the maximum id of airport
+    (note: doesn't equal the actual number of airports in the graph
+    because some airport id does not match any airports)
+*/
 int Graph::getnumAirport() {
     return adjList.size();
 }

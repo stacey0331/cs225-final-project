@@ -24,7 +24,6 @@ class Graph {
         void createGraph();
         void mapAirportCodeName();
         void mapLatLong();
-        void printGraph();
         double getWeight(int sourceAirportId, int destAirportId);
         double toRadians(double num);
 
@@ -38,11 +37,11 @@ class Graph {
     private: 
         int numAirport;
 /*
-each element in adjList is a vertex(airport)
-each vertex has an vector/list of its adjacent nodes/airport that it has a flight to
-each adjacent nodes are expressed as a pair, with first being airport ID and second being weight
+    Adjacency List: 
+    each element in adjList is a vertex(airport)
+    each vertex has an vector/list of its adjacent nodes/airport that it has a flight to
+    each adjacent nodes are expressed as a pair, with first being airport ID and second being weight
 */
-
         vector<vector<pair<int, double>>> adjList; // row index are airport id
         map<int, string> airportCode; // map airport ID to its IATA code
         map<int, string> airportName; // map airport ID to its name

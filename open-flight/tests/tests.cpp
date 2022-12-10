@@ -120,7 +120,6 @@ TEST_CASE("Graph:: correct adjacency list edge") {
         REQUIRE(containsEdge == true);
         to10++;
     }
-    // printGraph();
     fin.close();
 }
 

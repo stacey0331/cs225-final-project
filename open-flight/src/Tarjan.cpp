@@ -1,5 +1,7 @@
 /*
     Author: Stacey Lee
+    This file implements Tarjan's algorithm to find Strongly
+    connected components. 
 */
 #include <iostream>
 #include <vector>
@@ -9,6 +11,10 @@
 
 using namespace std;
 
+/*
+    Default constructor
+    Calls function to find strongly connected components
+*/
 Tarjan::Tarjan() {
     compCount = 0;
     Graph g;
@@ -23,22 +29,21 @@ Tarjan::Tarjan() {
  
     // Call the recursive function to find strongly
     // connected components in DFS with vertex i
+    // This uses DFS traversals
     for (int i = 0; i < (int)adjList.size(); i++) {
         if (disc[i] == -1) {
             findScc(i);
         }
     }
-
-    // // for testing:
-    // for(vector<int> i: sccVec) {
-    //     if (i.size() == 7) {
-    //         cout << i[0] << endl;
-    //         cout << i[1] << endl;
-
-    //     }
-    // }
 }
 
+/*
+    Recursive function finding strongly connected components
+    using DFS traversals
+    sccVec: 2D vector storing each strongly connected components
+            in each row.
+    sccInd: indicate which row/component in sccVec this airports belongs to
+*/
 void Tarjan::findScc(int u) {
     static int time = 0;
  
@@ -75,7 +80,6 @@ void Tarjan::findScc(int u) {
         }
         // process the node st.top() == u
         w = (int)st.top();
-        // cout << w << "\n";
         temp.push_back(w);
         if (moreThanItself) {
             sccInd[w] = compCount;
@@ -89,6 +93,8 @@ void Tarjan::findScc(int u) {
     }
 }
 
+// helper function to get a list of node that are strongly connected to
+// an airport, by its airport id
 vector<int> Tarjan::getSccList(int airportId) {
     vector<int> outV;
     if (sccInd[airportId] >= 0) {
@@ -102,6 +108,7 @@ vector<int> Tarjan::getSccList(int airportId) {
     return outV;
 }
 
+// helper function to get private member sccVec
 vector<vector<int>> Tarjan::getSccVec() {
     return sccVec;
 }
