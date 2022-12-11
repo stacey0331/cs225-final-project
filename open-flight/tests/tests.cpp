@@ -1,3 +1,7 @@
+/*
+    Author:  Jianchen Hong, Stacey Lee, Yanjie Han
+*/
+
 #include <catch2/catch_test_macros.hpp>
 #include <fstream>
 #include <sstream>

@@ -1,5 +1,5 @@
 /*
-    Author: Stacey Lee
+    Author: Stacey Lee, Jianchen Hong
 */
 #include <iostream>
 #include <vector>
