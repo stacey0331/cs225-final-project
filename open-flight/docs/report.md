@@ -2,10 +2,17 @@
 
 ## Project Goal #1: Find Shortest Routes Between 2 Airports (Dijkstra's algorithm)
 ### Implementation
-
+Our Dijkstra's algorithm uses heap in O(E LogV). By using the priority queue, we can manage the vertex (airport) with weight (distance) in increasing order. To get the shortest path, whenever the distance of a vertex is reduced, we add one more instance of a vertex in priority_queue. We only consider the instance with minimum distance and ignore other instances.
 ### Output: 
+The Dijkstra class contains two functions which are shortestpath and getroute. 
+
+The shortestpath function will return the shortest distance between two airports with two parameters which are the start point and the destination (in int). 
+
+The getroute function will return a vector of int which represents the airports that we need to reach if we want the shortest path.
+![Dijkstra output screenshot](images/Dijkstra.png)
 
 ### Correctness/Testings
+In order to make sure the algorithm works correctly, we check the direct flight and the flight with tranfers. The distance between two airports can be simply got from the adjacency list which is made in the Graph class. If the value get by the shortestpath function is the same as the value get from the adjacency list, it means the function is correct. To check the getroute function, we can first check the start point and the destination are correct. And for the airports in between, we can use the adjacency list to get the shortest distance to check if they are matched.
 
 ---
 ## Project Goal #2: Find Airport Cluster (Tarjan's strongly connected components algorithm)
